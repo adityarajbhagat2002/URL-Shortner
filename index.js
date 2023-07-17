@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose= require('mongoose');
 const urlRoute = require('./routes/url')
+const userRoute = require('./routes/user')
 const {connectToMongoDB} = require('./connect')
 const URL =require('./models/url');
 const path = require('path');
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended : false}))
 
 app.use('/url' , urlRoute)
+app.use('/user' , userRoute)
 app.use('/' , staticRoute)
 
 app.get("/url/:shortID", async (req, res) => {
