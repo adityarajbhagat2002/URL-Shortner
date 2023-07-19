@@ -2,49 +2,130 @@
 <html lang="en">
 <head>
     <style>
-        body{
+        body {
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-color: #f1f1f1;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .url-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .url-form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .url-form input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .url-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .url-form button:hover {
+            background-color: #45a049;
+        }
+
+        .url-list {
+            margin-top: 30px;
+        }
+
+        .url-list table {
+            width: 100%;
+            background-color: #fff;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .url-list th, .url-list td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .url-list th {
+            background-color: #f2f2f2;
         }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Shortner</title>
+    <title>URL Shortener</title>
 </head>
 <body>
-    <h1>URL Shortner</h1>
+    <h1>URL Shortener</h1>
     <% if (locals.id) { %>
-    <p>URL Generated : http://localhost:8001/url<%= id %></p>
+    <div class="container">
+        <div class="url-form">
+            <p>URL Generated: <a href="http://localhost:8001/url/<%= id %>">http://localhost:8001/url/<%= id %></a></p>
+        </div>
+    </div>
     <% } %>
-    <div>
-        <form method="post" action="/url">
-            <label>Enter your URL</label>
-            <input type="text" name="url" placeholder="https://example.com"/>
-            <button type="submit">Generate</button>
-        </form>
+    <div class="container">
+        <div class="url-form">
+            <form method="post" action="/url">
+                <label>Enter your URL</label>
+                <input type="text" name="url" placeholder="https://example.com"/>
+                <button type="submit">Generate</button>
+            </form>
+        </div>
     </div>
-    <div>
-        <% if (locals.urls) { %>
-         <table>
-            <thead>
-                <th>S.no</th>
-                <th>Short IDs</th>
-                <th>Redirect</th>
-                <th>Clicks</th>
-            </thead>
-            <tbody>
-                <% urls.forEach((url ,index) => { %>
-            <tr>
-
-           
-                 <td><%= index+1 %></td>
-                 <td><%= url.shortID %></td>
-                 <td><%= url.redirectURL %></td>
-                 <td><%= url.visitHistory.length %></td>
-                </tr>
-                <% }) %>
-            </tbody>
-         </table>
-        <% } %>
+    <% if (locals.urls) { %>
+    <div class="container">
+        <div class="url-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.no</th>
+                        <th>Short IDs</th>
+                        <th>Redirect</th>
+                        <th>Clicks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% urls.forEach((url, index) => { %>
+                    <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= url.shortID %></td>
+                        <td><a href="<%= url.redirectURL %>"><%= url.redirectURL %></a></td>
+                        <td><%= url.visitHistory.length %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
     </div>
+    <% } %>
 </body>
 </html>
