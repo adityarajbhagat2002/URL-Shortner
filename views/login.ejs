@@ -57,6 +57,47 @@
         .login-container button:hover {
             background-color: #45a049;
         }
+        .login-container button, .signup-button button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .login-container button:hover, .signup-button button:hover {
+            background-color: #45a049;
+        }
+
+        .signup-button {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+
+        .signup-button a {
+            display: inline-block;
+            color: #4CAF50;
+            text-decoration: none;
+            /* Apply the same padding as the buttons */
+            padding: 12px;
+            /* Apply the same border radius as the buttons */
+            border-radius: 4px;
+            /* Apply the same transition as the buttons */
+            transition: background-color 0.3s;
+        }
+
+
+        .signup-button a:hover {
+            background-color: #45a049;
+            color: #fff;
+        }
+
+
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,6 +115,9 @@
 
            <button type="submit">Login</button>
        </form>
+       <div class="signup-button">
+        <a href="/signup">Sign Up</a>
+    </div>
    </div>
 </body>
 </html>
